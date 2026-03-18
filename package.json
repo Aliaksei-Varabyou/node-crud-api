@@ -1,0 +1,31 @@
+{
+  "name": "crud-api",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "tsc -w & nodemon ./src/server.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "fastify": "^5.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "homepage": "https://github.com/Aliaksei-Varabyou/node-crud-api#readme",
+  "bugs": {
+    "url": "https://github.com/Aliaksei-Varabyou/node-crud-api/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aliaksei-Varabyou/node-crud-api.git"
+  }
+}
