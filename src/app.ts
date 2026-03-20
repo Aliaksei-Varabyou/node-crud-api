@@ -2,6 +2,7 @@ import Fastify, { type FastifyInstance } from "fastify";
 import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod";
 import productsRoute from "./routes/products.ts";
 import { hasStatusCode } from "./errors/guards.ts";
+import { ZodError } from "zod";
 
 export const buildApp = () => {
   const app: FastifyInstance = Fastify({
@@ -13,6 +14,12 @@ export const buildApp = () => {
   app.setErrorHandler((error, request, reply) => {
     request.log.error(error);
 
+    if (error instanceof ZodError) {
+      return reply.status(400).send({
+        error: 'Validation error'
+      });
+    }
+
     const statusCode = hasStatusCode(error) ? error.statusCode : 500;
     const message = error instanceof Error ? error.message : 'Internal error';
     
@@ -21,7 +28,7 @@ export const buildApp = () => {
     });
   });
 
-  app.register(productsRoute, {prefix: '/products'})
+  app.register(productsRoute, {prefix: '/api/products'})
 
   return app;
 }

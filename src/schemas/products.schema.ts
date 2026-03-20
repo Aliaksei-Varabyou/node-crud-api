@@ -1,21 +1,18 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
-export const CreateProductSchema = z.object({
-  name: z.string(),
+const ProductSchema = z.object({
+  id: z.string(),
+  name: z.string().min(1),
   description: z.string(),
-  price: z.number(),
+  price: z.number().positive(),
   category: z.string(),
   inStock: z.boolean()
 })
 
-export const UpdateProductSchema = z.object({
-  name: z.string().optional(),
-  description: z.string().optional(),
-  price: z.number().optional(),
-  category: z.string().optional(),
-  inStock: z.boolean().optional()
-})
+export const CreateProductSchema = ProductSchema.omit({ 'id': true });
 
-export const idParamSchema = z.object({
+export const UpdateProductSchema = CreateProductSchema.partial();
+
+export const ProductIdSchema = z.object({
   id: z.string()
 });
