@@ -1,7 +1,7 @@
 import type { FastifyInstance } from "fastify";
 import type { ZodTypeProvider } from "fastify-type-provider-zod";
-import { CreateProductSchema, ProductIdSchema, UpdateProductSchema } from "../schemas/products.schema.ts";
-import { productService } from "../services/productService.ts";
+import { CreateProductSchema, ProductIdSchema, UpdateProductSchema } from "../schemas/products.schema.js";
+import { productService } from "../services/productService.js";
 
 export default async function productsRoute(app: FastifyInstance) {
   const appTyped = app.withTypeProvider<ZodTypeProvider>();

@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import type { Product, UpdateProduct } from "../types.ts";
+import type { Product, UpdateProduct } from "../types.js";
 
 class InMemoryDB {
   private products: Product[] = [];

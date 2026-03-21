@@ -1,7 +1,7 @@
 import Fastify, { type FastifyInstance } from "fastify";
 import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod";
-import productsRoute from "./routes/products.ts";
-import { hasStatusCode } from "./errors/guards.ts";
+import productsRoute from "./routes/products.js";
+import { hasStatusCode } from "./errors/guards.js";
 import { ZodError } from "zod";
 
 export const buildApp = () => {

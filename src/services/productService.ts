@@ -1,6 +1,6 @@
-import { NotFoundError } from "../errors/classes.ts";
-import { db } from "../models/product.ts";
-import type { CreateProduct, UpdateProduct } from "../types.ts";
+import { NotFoundError } from "../errors/classes.js";
+import { db } from "../models/product.js";
+import type { CreateProduct, UpdateProduct } from "../types.js";
 
 
 class ProductService {

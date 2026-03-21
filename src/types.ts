@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import type { CreateProductSchema, UpdateProductSchema } from './schemas/products.schema.ts';
+import type { CreateProductSchema, UpdateProductSchema } from './schemas/products.schema.js';
 
 export interface Product {
   id: string,
