@@ -10,7 +10,7 @@
     "build": "tsc -p tsconfig.json",
     "start:dev": "tsx watch ./src/server.ts",
     "start:prod": "npm run build && node ./dist/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest ./src"
   },
   "dependencies": {
     "fastify": "^5.8.2",
@@ -24,7 +24,8 @@
     "nodemon": "^3.1.14",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.0"
   },
   "homepage": "https://github.com/Aliaksei-Varabyou/node-crud-api#readme",
   "bugs": {
