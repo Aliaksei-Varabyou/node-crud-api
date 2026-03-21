@@ -1,3 +1,6 @@
+import { z } from 'zod';
+import type { CreateProductSchema, UpdateProductSchema } from './schemas/products.schema.ts';
+
 export interface Product {
   id: string,
   name: string,
@@ -6,3 +9,6 @@ export interface Product {
   category: string,
   inStock: boolean
 }
+
+export type CreateProduct = z.infer<typeof CreateProductSchema>;
+export type UpdateProduct = z.infer<typeof UpdateProductSchema>;
