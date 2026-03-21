@@ -5,8 +5,20 @@ import { hasStatusCode } from "./errors/guards.js";
 import { ZodError } from "zod";
 
 export const buildApp = () => {
+  const isDev = process.env.NODE_ENV !== 'production';
   const app: FastifyInstance = Fastify({
-    logger: true,
+    logger: isDev
+      ? {
+          transport: {
+            target: 'pino-pretty',
+            options: {
+              colorize: true,
+              translateTime: 'HH:MM:ss',
+              ignore: 'pid,hostname',
+            },
+          },
+        }
+      : true,
   });
   app.setValidatorCompiler(validatorCompiler);
   app.setSerializerCompiler(serializerCompiler);
