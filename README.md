@@ -44,14 +44,18 @@ You can run the application in the next modes:
 
 ## Single process mode
 
-````bash
+```bash
 npm run start:dev
 ```
+
 ## Multiprocess mode
+
 ```bash
 npm run start:multi
 ```
+
 ## It is also possible to build applications in prod mode
+
 ```bash
 npm run start:prod
 ```
@@ -69,6 +73,7 @@ DELETE /api/products/:id: delete record by ID.
 # Multiprocess mode
 
 In multiprocess mode, requests are distributed across different processes. Each process listens to its own unique port, starting from 4001 and onwards. The load balancer listens on port 4000 and distributes incoming requests between the processes.
+
 ````
 
 # Testing
@@ -76,3 +81,4 @@ In multiprocess mode, requests are distributed across different processes. Each 
 ```bash
 npm run test
 ```
+````
