@@ -23,7 +23,7 @@ export default async function productsRoute(app: FastifyInstance) {
     }
   );
 
-  appTyped.patch('/:id',
+  appTyped.put('/:id',
     async (req) => {
       const {id} = ProductIdSchema.parse(req.params);
       const updateData = UpdateProductSchema.parse(req.body);

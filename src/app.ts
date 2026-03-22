@@ -3,6 +3,7 @@ import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod
 import productsRoute from "./routes/products.js";
 import { hasStatusCode } from "./errors/guards.js";
 import { ZodError } from "zod";
+import { BadRequestError } from "./errors/classes.js";
 
 export const buildApp = () => {
   const isDev = process.env.NODE_ENV !== 'production';
@@ -27,9 +28,7 @@ export const buildApp = () => {
     request.log.error(error);
 
     if (error instanceof ZodError) {
-      return reply.status(400).send({
-        error: 'Validation error'
-      });
+      throw new BadRequestError(error.issues.map(i => i.message).join('; ') || 'Validation error');
     }
 
     const statusCode = hasStatusCode(error) ? error.statusCode : 500;

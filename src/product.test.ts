@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { buildApp } from './app.js';
-import type { FastifyInstance } from 'fastify';
 import type { Product } from './types.js';
 
 describe('Product CRUD API', () => {
@@ -58,7 +57,7 @@ describe('Product CRUD API', () => {
 
   it('should update product', async () => {
     const response = await app.inject({
-      method: 'PATCH',
+      method: 'PUT',
       url: `${baseUrl}/${createdProductId}`,
       payload: {
         name: 'Mobile',
@@ -77,5 +76,47 @@ describe('Product CRUD API', () => {
       url: `${baseUrl}/${createdProductId}`
     });
     expect(response.statusCode).toBe(204);
+  });
+
+  it('should return 400 for invalid UUID', async () => {
+    const response = await app.inject({
+      method: 'GET',
+      url: `${baseUrl}/invalid-id`,
+    });
+
+    const body = response.json();
+
+    expect(response.statusCode).toBe(400);
+    expect(body.error).toBeDefined();
+  });
+
+  it('should return 404 for non-existing product', async () => {
+    const nonExistingId = '550e8400-e29b-41d4-a716-446655440000';
+
+    const response = await app.inject({
+      method: 'GET',
+      url: `${baseUrl}/${nonExistingId}`,
+    });
+
+    const body = response.json();
+
+    expect(response.statusCode).toBe(404);
+    expect(body.error).toBeDefined();
+  });
+
+  it('should return 400 for invalid product data', async () => {
+    const response = await app.inject({
+      method: 'POST',
+      url: baseUrl,
+      payload: {
+        name: '',
+        price: -10
+      }
+    });
+
+    const body = response.json();
+
+    expect(response.statusCode).toBe(400);
+    expect(body.error).toBeDefined();
   });
 });
