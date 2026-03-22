@@ -3,10 +3,20 @@ import cluster from 'node:cluster';
 import os from 'node:os';
 import http from 'node:http';
 import { buildApp } from './app.js';
+import { db } from './models/product.js';
 
 dotenv.config({debug: false});
 const PORT = parseInt(process.env.PORT || '3000', 10);
 const workersCount: number = os.availableParallelism() - 1;
+
+cluster.on('message', (worker, msg: any) => {
+  const result = db.handle(msg.type, msg.payload);
+
+  worker.send({
+    requestId: msg.requestId,
+    result
+  });
+});
 
 if (cluster.isPrimary) {
   const workers: number[] = [];
@@ -53,7 +63,7 @@ if (cluster.isPrimary) {
 
   const app = buildApp();
   try {
-    await app.listen({ port: workerPort }, () => {
+    app.listen({ port: workerPort }, () => {
       console.log(`Worker started at http://localhost:${workerPort}`);
     });
   } catch (err) {

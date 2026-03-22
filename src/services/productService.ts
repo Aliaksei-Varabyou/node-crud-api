@@ -5,37 +5,37 @@ import type { CreateProduct, UpdateProduct } from "../types.js";
 
 class ProductService {
 
-  private ensureValidProduct(id: string) {
+  private async ensureValidProduct(id: string) {
     if (!isUUID(id)) {
       throw new BadRequestError('Id is not a correct UUID');
     }
-    const product = db.getProductById(id);
+    const product = await db.getProductById(id);
     if (!product) {
       throw new NotFoundError('Product not found');
     }
     return product;
   }
 
-  getAll() {
-    return db.getAllProducts();
+  async getAll() {
+    return await db.getAllProducts();
   }
 
-  getById(id: string) {
-    return this.ensureValidProduct(id);
+  async getById(id: string) {
+    return await this.ensureValidProduct(id);
   }
 
-  create(data: CreateProduct) {
-    return db.createProduct(data);
+  async create(data: CreateProduct) {
+    return await db.createProduct(data);
   }
 
-  update(id: string, data: UpdateProduct) {
-    this.ensureValidProduct(id);
-    return db.updateProduct(id, data);
+  async update(id: string, data: UpdateProduct) {
+    await this.ensureValidProduct(id);
+    return await db.updateProduct(id, data);
   }
 
-  delete(id: string) {
-    this.ensureValidProduct(id);
-    db.deleteProduct(id);
+  async delete(id: string) {
+    await this.ensureValidProduct(id);
+    await db.deleteProduct(id);
   }
 
 }
