@@ -65,9 +65,13 @@ npm run start:prod
 Once the application is running, you can interact with it by sending HTTP requests to the appropriate endpoints:
 
 GET /api/products: getting a list of data.
+
 POST /api/products: creating a new entry.
+
 GET /api/products/:id: getting a record by ID.
+
 PUT /api/products/:id: update record by ID.
+
 DELETE /api/products/:id: delete record by ID.
 
 # Multiprocess mode
