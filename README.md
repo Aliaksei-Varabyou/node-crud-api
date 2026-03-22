@@ -46,13 +46,15 @@ You can run the application in the next modes:
 
 ````bash
 npm run start:dev
-
+```
 ## Multiprocess mode
 ```bash
 npm run start:multi
+```
 ## It is also possible to build applications in prod mode
 ```bash
 npm run start:prod
+```
 
 # Usage
 
